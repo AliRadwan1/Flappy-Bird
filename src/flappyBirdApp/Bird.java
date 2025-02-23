@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class Bird {
 	private int x;// 360 / 8;
-	private int y;// = 640 / 2;
+	private int y;// 640 / 2;
 	private final int width = 34;
 	private final int height = 24;
 	private Image img;

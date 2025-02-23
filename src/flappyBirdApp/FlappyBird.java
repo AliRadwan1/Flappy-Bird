@@ -19,7 +19,6 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 	// Bird
 	int birdX = boardWidth / 8;
 	int birdY = boardHeight / 2;
-	int birdWidth = 34;
 
 	// pipe
 	int pipeX = boardWidth;
@@ -81,16 +80,19 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 		int openingSpace = boardHeight / 4;
 
 		Pipe topPipe = new Pipe(pipeX, pipeY, topPipeImg);
-		topPipe.y = randomPipeY;
+		topPipe.setY(randomPipeY);// = randomPipeY;
 		pipes.add(topPipe);
 
 		Pipe bottomPipe = new Pipe(pipeX, pipeY, bottomPipeImg);
-		bottomPipe.y = topPipe.y + pipeHeight + openingSpace;
+//		bottomPipe.y = topPipe.y + pipeHeight + openingSpace;
+		int tepmPipe = topPipe.getY() + pipeHeight + openingSpace;
+		bottomPipe.setY(tepmPipe);
 		pipes.add(bottomPipe);
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		super.paintComponent(g); // JPanel
 		draw(g);
 	}
 
@@ -104,7 +106,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 		// pipes
 		for (int i = 0; i < pipes.size(); i++) {
 			Pipe pipe = pipes.get(i);
-			g.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height, null);
+			g.drawImage(pipe.getImg(), pipe.getX(), pipe.getY(), pipe.getWidth(), pipe.getHeight(), null);
 		}
 
 		// score
@@ -128,10 +130,12 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 		// pipe
 		for (int i = 0; i < pipes.size(); i++) {
 			Pipe pipe = pipes.get(i);
-			pipe.x += velocityX;
+//			pipe.x += velocityX;
+			int tempPipeX = pipe.getX() + velocityX;
+			pipe.setX(tempPipeX);
 
-			if (!pipe.passed && bird.getX() > pipe.x + pipe.width) {
-				pipe.passed = true;
+			if (!pipe.isPassed() && bird.getX() > pipe.getX() + pipe.getWidth()) {
+				pipe.setPassed(true);// = true;
 				score += 0.5; // 0.5 because there are 2 pipes! so 0.5*2 = 1, 1 for each set of pipes
 			}
 
@@ -146,10 +150,10 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 	}
 
 	boolean collision(Bird a, Pipe b) {
-		return a.getX() < b.x + b.width && // a's top left corner doesn't reach b's top right corner
-				a.getX() + a.getWidth() > b.x && // a's top right corner passes b's top left corner
-				a.getY() < b.y + b.height && // a's top left corner doesn't reach b's bottom left corner
-				a.getY() + a.getHeight() > b.y; // a's bottom left corner passes b's top left corner
+		return a.getX() < b.getX() + b.getWidth() && // a's top left corner doesn't reach b's top right corner
+				a.getX() + a.getWidth() > b.getX() && // a's top right corner passes b's top left corner
+				a.getY() < b.getY() + b.getHeight() && // a's top left corner doesn't reach b's bottom left corner
+				a.getY() + a.getHeight() > b.getY(); // a's bottom left corner passes b's top left corner
 	}
 
 	@Override

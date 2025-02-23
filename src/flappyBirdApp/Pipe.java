@@ -3,15 +3,15 @@ package flappyBirdApp;
 import java.awt.Image;
 
 public class Pipe {
-	public int x;
-	public int y;
-	public final int width = 64;
-	public final int height = 512;
-	public Image img;
-	public boolean passed = false;
+	private int x;
+	private int y;
+	private final int width = 64;
+	private final int height = 512;
+	private Image img;
+	private boolean passed = false;
 
 	Pipe(int x, int y, Image img) {
-		super();
+//		super(); 
 		this.x = x;
 		this.y = y;
 		this.img = img;
@@ -47,6 +47,10 @@ public class Pipe {
 
 	public void setPassed(boolean passed) {
 		this.passed = passed;
+	}
+
+	public Image getImg() {
+		return img;
 	}
 
 }
