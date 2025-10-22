@@ -1,5 +1,4 @@
 # Flappy Bird
-<<<<<<< HEAD
 
 ## Installation
 
