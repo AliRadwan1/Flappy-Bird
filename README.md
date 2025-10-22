@@ -46,5 +46,3 @@ If you would like to contribute to the Flappy Bird project, please follow these 
 ## Testing
 
 Run the main using your preferred IDE or framework
-=======
->>>>>>> 53bea57629c07da2914dfdf5f3067207464b0c92
